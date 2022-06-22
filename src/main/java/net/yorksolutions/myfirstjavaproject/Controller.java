@@ -2,15 +2,20 @@ package net.yorksolutions.myfirstjavaproject;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 // Controller - is a collection of methods that respond to http requests
 // RestController - expects the http requests to follow RESTful guidlines
 //     pass data back and forth using JSON format
 @RestController // Tell Spring that this class is a rest controller
 public class Controller {
+    final RestTemplate rest = new RestTemplate();
+
     // Tell tomcat to call this method when http://localhost:8080/hello it called with a GET request
     @GetMapping("/hello")
     String helloWorld() {
@@ -31,19 +36,12 @@ public class Controller {
     // Act as a middle man for ip.jsontest.com
     @GetMapping("/ip")
     String ip() {
-        final RestTemplate rest = new RestTemplate();
         return rest.getForObject("http://ip.jsontest.com", String.class);
-    }
-
-    private static class IP {
-        @JsonProperty("ip")
-        String ipAddress;
     }
 
     // Act as a middle man for ip.jsontest.com
     @GetMapping("/ipjson")
     String ipjson() {
-        final RestTemplate rest = new RestTemplate();
         // RestTemplate will assume that the response is JSON formatted, and will try to parse
         //     the json string into the java object that we specify
         final IP ipResponse = rest.getForObject("http://ip.jsontest.com", IP.class);
@@ -59,10 +57,17 @@ public class Controller {
     }
 
     @GetMapping("/headers")
-    Headers headers() {
-        final RestTemplate rest = new RestTemplate();
+    Map<String, String> headers(@RequestHeader Map<String, String> headers) {
         // RestTemplate will assume that the response is JSON formatted, and will try to parse
         //     the json string into the java object that we specify
-        return rest.getForObject("http://headers.jsontest.com", Headers.class);
+        return headers;
     }
+
+    @GetMapping("/json")
+    String json(String json) {
+        return json;
+    }
+
+    // Put jsontest.com out of business
+    // You shall implement all of the endpoints that jsontest.com provides using java/spring boot
 }
