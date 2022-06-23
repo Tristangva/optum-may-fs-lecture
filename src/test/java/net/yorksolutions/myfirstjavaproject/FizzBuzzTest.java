@@ -25,25 +25,33 @@ class FizzBuzzTest {
     //Otherwise output number as string
     @Test
     void itShouldOutputAStringVersionOfTheNumberInput() {
-        final String actual = FizzBuzz.fizzbuzz(4);
+         String actual =  new FizzBuzz().fizzbuzz(4);
         assertEquals("4", actual);
+        actual = new FizzBuzz().fizzbuzz(7);
+        assertEquals("7", actual);
     }
 
     @Test
     void itShouldOutputFizzWhenTheInputIsAMultipleOf3(){
-        final String actual = FizzBuzz.fizzbuzz(9);
+        String actual = new FizzBuzz().fizzbuzz(9);
+        assertEquals("Fizz", actual);
+        actual = new FizzBuzz().fizzbuzz(3);
         assertEquals("Fizz", actual);
     }
 
     @Test
     void itShouldOutputBuzzWhenTheInputIsAMultipleOf5(){
-        final String actual = FizzBuzz.fizzbuzz(10);
+        String actual = new FizzBuzz().fizzbuzz(10);
+        assertEquals("Buzz", actual);
+        actual = new FizzBuzz().fizzbuzz(5);
         assertEquals("Buzz", actual);
     }
 
     @Test
     void itShouldOutputFizzBuzzWhenTheInputIsAMultipleOf5and3(){
-        final String actual = FizzBuzz.fizzbuzz(15);
+        String actual = new FizzBuzz().fizzbuzz(15);
+        assertEquals("FizzBuzz", actual);
+        actual = new FizzBuzz().fizzbuzz(30);
         assertEquals("FizzBuzz", actual);
     }
 }

@@ -9,7 +9,7 @@ public class FizzBuzz {
     // if number is a multiple of 3 and 5, output FizzBuzz
     //Otherwise output number as string
 
-    public static String fizzbuzz(int input){
+    public  String fizzbuzz(int input){
         if (input % 3 == 0 && input % 5 == 0) return  "FizzBuzz";
 
         if (input % 3 == 0) return "Fizz";
